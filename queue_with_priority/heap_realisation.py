@@ -1,7 +1,7 @@
 from math import floor
 
 
-class HeapNode:
+class MaxHeapNode:
     def __init__(self,value = 0, array = None):
         self._data = [value]
         if array:
@@ -81,7 +81,7 @@ class HeapNode:
         last_el, max_el = self._data[-1], self._data[0]
         self._data[0] = last_el
         self._data.pop()
-        self.push_down(1, len(self.heap_data))
+        self.push_down(0, len(self.heap_data))
         return max_el
 
     def remove(self, ind):
@@ -106,14 +106,14 @@ class HeapNode:
 
     @staticmethod
     def build_heap(arr):
-        unordered_heap = HeapNode(array=arr)
+        unordered_heap = MaxHeapNode(array=arr)
         for i in range(int(len(arr)/2), 0, -1):
             unordered_heap.push_down(i, len(arr))
         return unordered_heap
 
     @staticmethod
     def heap_sort(arr):
-        heap_arr = HeapNode.build_heap(arr)
+        heap_arr = MaxHeapNode.build_heap(arr)
         size = len(heap_arr)
         for ind in range(size-1, 0, -1):
             heap_arr.heap_data[ind], heap_arr.heap_data[0] = \
@@ -122,7 +122,13 @@ class HeapNode:
         return heap_arr.heap_data
 
 
-start_node = HeapNode(value= 2)
+
+
+
+
+
+
+start_node = MaxHeapNode(value= 2)
 start_node.insert(5)
 start_node.insert(9)
 start_node.insert(0)
@@ -149,7 +155,12 @@ start_node.change_priority(3, 16)
 start_node.print_heap()
 print(start_node)
 
-new_node = HeapNode.build_heap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+new_node = MaxHeapNode.build_heap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 new_node.print_heap()
 print(new_node)
-print(HeapNode.heap_sort([8, 4, 5, 2, 1, 11, 16, 50, 0, 7]))
+print(MaxHeapNode.heap_sort([8, 4, 5, 2, 1, 11, 16, 50, 0, 7]))
+
+print('-------------------------------------------------------------')
+test_heap = MaxHeapNode.build_heap([1, 2, 3, 4, 5])
+print(test_heap)
+test_heap.print_heap()
